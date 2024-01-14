@@ -1,34 +1,37 @@
 import React from 'react';
-import { Container, Navbar, Nav, Button, Form } from 'react-bootstrap';
+import { Container, Navbar, Nav, Button, Form, Col } from 'react-bootstrap';
 
 
 const Header = () => {
     return (
         
-        <Container fluid className="px-0 m-0">
+        <Container fluid className="px-0">
             <header>
-                <Navbar expand="lg" className="bg-primary" data-bs-theme="dark">
-                    <Navbar.Brand className="px-2" href="/">Event Tracker</Navbar.Brand>
-                
-                    <Form inline className="d-inline-flex flex-grow-1 p-2 bd-highlight">
+                <Navbar expand="md" className="bg-primary" data-bs-theme="dark">
+                    <Navbar.Brand className="px-2 m-0" href="/">EventApp</Navbar.Brand>
+                    
+                    <Col>
+                        <Form className="flex-grow-1 p-0 bd-highlight">
                         <Form.Control
-                        type="text"
-                        placeholder="Search for Event"
-                        className=""
+                            size="sm"
+                            type="text"
+                            placeholder="Search Events"
+                            className=""
                         />
-                        <Button type="submit" className="mx-2 btn btn-info">Submit</Button>
-                    </Form>
+                        {/*<Button type="submit" className="ms-2 btn btn-info fs-6">Submit</Button> */}
+                        </Form>
+                    </Col>
                     
-                    <Navbar.Toggle aria-controls='basic-navbar-nav' className="mx-2 px-2" />
+                    <Navbar.Toggle aria-controls='basic-navbar-nav' className="ms-2 me-2 px-2" />
                     
-                    <Navbar.Collapse id='basic-navbar-nav'>
-                        <Nav className='ms-auto'>
-                            <Nav.Link href='/events'>Find Events</Nav.Link>
-                            <Nav.Link href='/organizer'>Create Events</Nav.Link>
-                            {/* Help center needs dropdown window controls */}
-                            <Nav.Link href='/help'>Help Center</Nav.Link>
-                            <Nav.Link href='/signin'>Log In</Nav.Link>
-                            <Nav.Link href='/signin/signup'>Sign Up</Nav.Link>
+                    <Navbar.Collapse className="flex-grow-0 ms-3 me-2" id='basic-navbar-nav'>
+                        <Nav className='fs-6 ms-auto'>
+                            <Nav.Link as={Button} href='/events'>Find Events</Nav.Link>
+                            <Nav.Link as={Button} href='/organizer'>Create Events</Nav.Link>
+                            {/* Help center still needs dropdown window controls */}
+                            <Nav.Link as={Button} href='/help'>Help Center</Nav.Link>
+                            <Nav.Link as={Button} href='/signin'>Log In</Nav.Link>
+                            <Nav.Link as={Button} href='/signin/signup'>Sign Up</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
