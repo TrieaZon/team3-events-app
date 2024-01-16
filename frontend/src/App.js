@@ -5,13 +5,14 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import HomeScreen from './screens/HomeScreen';
 import './bootstrap.css';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
     <>
     <Router>
       <Header />
-      <main>
+        <main>
           <Container>
             <Routes>
               <Route path='/' exact element={<HomeScreen />} />
