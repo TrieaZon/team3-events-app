@@ -6,7 +6,7 @@ const Header = () => {
     return (
         
         <Container fluid className="px-0">
-            <header>
+            <Header>
                 <Navbar expand="md" className="bg-primary" data-bs-theme="dark">
                     <Navbar.Brand className="px-2 m-0" href="/">EventApp</Navbar.Brand>
                     
@@ -35,7 +35,7 @@ const Header = () => {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-            </header>
+            </Header>
         </Container>
     );
 };
