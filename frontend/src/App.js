@@ -1,18 +1,25 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import { Container } from "react-bootstrap";
-import HomeScreen from './screens/HomeScreen.js';
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import HomeScreen from './screens/HomeScreen';
+import './bootstrap.css';
+
 
 function App() {
   return (
-    <>
     <Router>
-    <Container>
-      <Routes>
-        <Route path="/" exact element={<HomeScreen />} />
-      </Routes>
-    </Container>
+    
+      <Header />
+      <main>
+          <Container>
+            <Routes>
+              <Route path='/' exact element={<HomeScreen />} />
+            </Routes>
+          </Container>
+        </main>
+    
     </Router>
-    </>
   );
 }
 
