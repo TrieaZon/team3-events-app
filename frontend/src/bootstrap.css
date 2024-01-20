@@ -4369,7 +4369,7 @@ textarea.form-control-lg {
 .navbar-dark,
 .navbar[data-bs-theme=dark] {
   --bs-navbar-color: #fff;
-  --bs-navbar-hover-color: #18bc9c;
+  --bs-navbar-hover-color: hsl(180, 25%, 98%);
   --bs-navbar-disabled-color: rgba(255, 255, 255, 0.25);
   --bs-navbar-active-color: #18bc9c;
   --bs-navbar-brand-color: #fff;
@@ -4413,6 +4413,10 @@ textarea.form-control-lg {
   background-clip: border-box;
   border: var(--bs-card-border-width) solid var(--bs-card-border-color);
   border-radius: var(--bs-card-border-radius);
+  transition: box-shadow .3s ease-in-out;
+}
+.card:hover {
+  box-shadow: 3px 3px 10px rgb(221, 221, 221);
 }
 .card > hr {
   margin-right: 0;

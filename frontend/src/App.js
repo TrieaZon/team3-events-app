@@ -11,7 +11,7 @@ const App = () => {
     <Router>
       <Header />
         <main>
-          <Container>
+          <Container fluid className="px-0">
             <Routes>
               <Route path='/' exact element={<HomeScreen />} />
             </Routes>
