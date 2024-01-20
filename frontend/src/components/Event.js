@@ -11,9 +11,9 @@ import {Link} from 'react-router-dom'
 
 const Event = ({event}) => {
   return (
-  <Card>
+  <Card className= 'border border-0 my-3 mx-1 rounded-bottom-4 btn-light'>
     <Link to={`/event/${event._id}`}>
-    <Card.Img variant="top" src={event.image} rounded />
+    <Card.Img className="rounded" variant="top" src={event.image} />
       <Button variant="light"><i class="fa-regular fa-heart"></i></Button>
       <Button variant="light"><i class="fa-solid fa-share"></i></Button>
       </Link>
