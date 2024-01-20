@@ -22,7 +22,7 @@ const Banner = () => {
                         {/* div set to absolute position to sit on top of image */}
                         <div className="position-absolute bottom-0">
                             <Nav href="/local-events" className="mb-4 rounded-2 px-0 py-1 bg-danger" >
-                                <Nav.Link className="text-light fw-bold">
+                                <Nav.Link className="text-light fw-bold px-3">
                                     Find your next event
                                 </Nav.Link>
                             </Nav>

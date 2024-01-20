@@ -1,11 +1,10 @@
 import React from 'react'
-import events from '../events.js'
 import Event from '../components/Event.js'
 import Banner from '../components/Banner.js'
 import { Container, Col, Row } from 'react-bootstrap'
 
 
-const HomeScreen = () => {
+const HomeScreen = ( {events} ) => {
   return (
     <>
       <Banner />
