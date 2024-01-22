@@ -1,9 +1,7 @@
 import React from 'react'
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
-
-//fix import and event parameter
 //change button icons to only appear upon hover and overlap with image
 //<Card.Text as='div'> {event.organizerName} </Card.Text>
 //<Card.Text as='div'> <i class="fa-solid fa-person"></i> {event.followers} followers </Card.Text>
@@ -23,7 +21,7 @@ const Event = ({event}) => {
       </Link>
       <Card.Text as='div'> {event.date}, {event.startTime}-{event.endTime}  </Card.Text>
       <Card.Text as='div'> {event.venue}, {event.address} </Card.Text>
-      <Card.Text as='div'> From {event.minCost} </Card.Text>
+      <Card.Text as='div'> {event.costYes ? `From $ ${event.minCost}`: 'Free'} </Card.Text>
     </Card.Body>
   </Card>
   )
