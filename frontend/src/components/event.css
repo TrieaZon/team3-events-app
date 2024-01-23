@@ -1,0 +1,12 @@
+.image {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  height: auto;
+}
+.icons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+} 
