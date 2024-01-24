@@ -131,6 +131,11 @@
   --bs-form-valid-border-color: #18bc9c;
   --bs-form-invalid-color: #e74c3c;
   --bs-form-invalid-border-color: #e74c3c;
+  --base-unit: 8px;
+  --container-max-width: 940px;
+  --event-details-main-max-width: 720px;
+  --main-bg-color: #fff;
+  --vibrant-blue-color: #0124e9
 }
 
 [data-bs-theme=dark] {
@@ -418,10 +423,6 @@ figure {
 img,
 svg {
   vertical-align: middle;
-}
-
-img {
-  max-width: 940px;
 }
 
 table {
@@ -6248,6 +6249,41 @@ textarea.form-control-lg {
 }
 [data-bs-theme=dark] .carousel .carousel-caption, [data-bs-theme=dark].carousel .carousel-caption {
   color: #000;
+}
+
+.event-hero {
+  --border-radius: calc(3*var(--base-unit));
+  position: relative;
+  max-width: 1080px;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  text-align: center;
+  max-height: 50vw;
+  overflow: hidden;
+  font-size: 0;
+  background-color: #fff;
+  border-bottom-right-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius)
+}
+
+@media (min-width: 940px) {
+  .event-hero {
+      max-height:470px
+  }
+}
+
+@media (min-width: 1200px) {
+  .event-hero {
+      border-radius:var(--border-radius)
+  }
+}
+
+.event-hero img {
+  max-width: 940px;
+  position: relative;
+  width: 100%;
+  height: auto;
+  z-index: 1
 }
 
 .spinner-grow,
