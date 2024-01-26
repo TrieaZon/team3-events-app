@@ -4,9 +4,19 @@
   width: 100%;
   height: auto;
 }
+
+.hide {
+  display: none;
+}
+
+
 .icons {
   position: absolute;
   top: 0;
   right: 0;
   z-index: 1;
 } 
+
+.show-icons:hover + .hide {
+  display: block;
+}

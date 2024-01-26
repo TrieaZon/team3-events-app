@@ -12,10 +12,10 @@ const Event = ({event}) => {
   return (
   <Card className= 'border border-0 my-3 mx-1 rounded-bottom-4 btn-light'>
     <Link to={`/event/${event._id}`}>
-    <Card.Img className="rounded image" variant="top" src={event.image} />
-    <div className="icons">
-      <Button variant="light"><i class="fa-regular fa-heart"></i></Button>
-      <Button variant="light"><i class="fa-solid fa-share"></i></Button>
+    <Card.Img className="rounded image show-icons" variant="top" src={event.image} />
+    <div className="icons hide my-2">
+      <Button variant="light" className="me-1"><i class="fa-regular fa-heart"></i></Button>
+      <Button variant="light" className="me-1"><i class="fa-solid fa-share"></i></Button>
       </div>
       </Link>
     <Card.Body>
