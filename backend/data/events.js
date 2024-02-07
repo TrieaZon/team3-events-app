@@ -1,6 +1,5 @@
 const events = [
   {
-    _id: "1",
     name: "Happy Hour Social",
     date: "2/6/2024",
     startTime: "4:00 p.m.",
@@ -9,7 +8,7 @@ const events = [
     address: "2616 East Cherry Street",
     city: "Seattle",
     state: "WA",
-    zipCode: 98122,
+    zipcode: 98122,
     headline: "Happy hours specials",
     description: "Happy hours specials",
     category: ["Food & Drinks"],
@@ -21,7 +20,6 @@ const events = [
     countTickets: 100,
   },
   {
-    _id: "2",
     name: "Open Mic Night",
     date: "2/9/2024",
     startTime: "7:00 p.m.",
@@ -42,7 +40,6 @@ const events = [
     ticketNum: 75,
   },
   {
-    _id: "3",
     name: "Winter Music Fest",
     date: "2/10/2024",
     startTime: "4:00 p.m.",
@@ -63,7 +60,6 @@ const events = [
     countTickets: 500,
   },
   {
-    _id: "4",
     name: "Speed Dating",
     date: "2/6/2024",
     startTime: "4:00 p.m.",
@@ -72,7 +68,7 @@ const events = [
     address: "2616 East Cherry Street",
     city: "Seattle",
     state: "WA",
-    zipCode: 98122,
+    zipcode: 98122,
     headline: "Happy hours specials",
     description: "Happy hours specials",
     category: ["Food & Drinks"],
@@ -84,7 +80,6 @@ const events = [
     countTickets: 100,
   },
   {
-    _id: "5",
     name: "Karaoke Night",
     date: "2/9/2024",
     startTime: "7:00 p.m.",
@@ -105,7 +100,6 @@ const events = [
     ticketNum: 75,
   },
   {
-    _id: "6",
     name: "Spring Music Fest",
     date: "2/10/2024",
     startTime: "4:00 p.m.",
@@ -126,7 +120,6 @@ const events = [
     countTickets: 500,
   },
   {
-    _id: "7",
     name: "All You Can Eat",
     date: "2/6/2024",
     startTime: "4:00 p.m.",
@@ -135,7 +128,7 @@ const events = [
     address: "2616 East Cherry Street",
     city: "Seattle",
     state: "WA",
-    zipCode: 98122,
+    zipcode: 98122,
     headline: "Happy hours specials",
     description: "Happy hours specials",
     category: ["Food & Drinks"],
@@ -147,7 +140,6 @@ const events = [
     countTickets: 100,
   },
   {
-    _id: "8",
     name: "Comedy Night",
     date: "2/9/2024",
     startTime: "7:00 p.m.",
@@ -168,7 +160,6 @@ const events = [
     ticketNum: 75,
   },
   {
-    _id: "9",
     name: "Summer Music Fest",
     date: "2/10/2024",
     startTime: "4:00 p.m.",
