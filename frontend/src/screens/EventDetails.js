@@ -10,6 +10,15 @@ const EventDetails = ({ events }) => {
     console.log(`events: ${events}`);
     console.log(`event: ${event}`)
 
+    //add useParams to access url params
+    // add useDispatch for actions
+    //add useNavigate for browser navigation
+
+    //add loader and create component
+    //add message and create component
+
+    //include ticket counter functionality
+
     return (
         <>
             <Container fluid="xxl" className="px-md-5 my-4 pb-2">
