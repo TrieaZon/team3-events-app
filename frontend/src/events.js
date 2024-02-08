@@ -1,6 +1,5 @@
 const events = [
   {
-    _id: "1",
     name: "Happy Hour Social",
     date: "2/6/2024",
     startTime: "4:00 p.m.",
@@ -19,9 +18,9 @@ const events = [
     costYes: false,
     minCost: 0,
     countTickets: 100,
+    locationRemote: true,
   },
   {
-    _id: "2",
     name: "Open Mic Night",
     date: "2/9/2024",
     startTime: "7:00 p.m.",
@@ -40,9 +39,10 @@ const events = [
     costYes: true,
     minCost: 15.00,
     ticketNum: 75,
+    locationRemote: false,
+    maxCost: 30.00,
   },
   {
-    _id: "3",
     name: "Winter Music Fest",
     date: "2/10/2024",
     startTime: "4:00 p.m.",
@@ -58,12 +58,13 @@ const events = [
     tags: ["Seattle events", "music", "festival", "hip hop", "pop", "indie"],
     image: "/image/concert-et.jpg",
     numLikes: 55,
-    costYes: false,
+    costYes: true,
     minCost: 45.00,
     countTickets: 500,
+    locationRemote: false,
+    maxCost: 75.00,
   },
   {
-    _id: "4",
     name: "Speed Dating",
     date: "2/6/2024",
     startTime: "4:00 p.m.",
@@ -82,9 +83,9 @@ const events = [
     costYes: false,
     minCost: 0,
     countTickets: 100,
+    locationRemote: false,
   },
   {
-    _id: "5",
     name: "Karaoke Night",
     date: "2/9/2024",
     startTime: "7:00 p.m.",
@@ -103,9 +104,10 @@ const events = [
     costYes: true,
     minCost: 15.00,
     ticketNum: 75,
+    locationRemote: false,
+    maxCost:  20.00,
   },
   {
-    _id: "6",
     name: "Spring Music Fest",
     date: "2/10/2024",
     startTime: "4:00 p.m.",
@@ -124,9 +126,10 @@ const events = [
     costYes: false,
     minCost: 45.00,
     countTickets: 500,
+    locationRemote: false,
+    maxCost: 60.00,
   },
   {
-    _id: "7",
     name: "All You Can Eat",
     date: "2/6/2024",
     startTime: "4:00 p.m.",
@@ -145,9 +148,9 @@ const events = [
     costYes: false,
     minCost: 0,
     countTickets: 100,
+    locationRemote: false,
   },
   {
-    _id: "8",
     name: "Comedy Night",
     date: "2/9/2024",
     startTime: "7:00 p.m.",
@@ -166,9 +169,10 @@ const events = [
     costYes: true,
     minCost: 15.00,
     ticketNum: 75,
+    locationRemote: false,
+    maxCost: 20.00,
   },
   {
-    _id: "9",
     name: "Summer Music Fest",
     date: "2/10/2024",
     startTime: "4:00 p.m.",
@@ -187,6 +191,8 @@ const events = [
     costYes: false,
     minCost: 45.00,
     countTickets: 500,
+    locationRemote: false,
+    maxCost: 80.00,
   },
 ]
 
