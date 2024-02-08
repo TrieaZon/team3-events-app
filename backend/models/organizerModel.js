@@ -17,8 +17,15 @@ const organizerSchema = mongoose.Schema({
   event: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'events',
-    required: true
-  }
+    require,d: true
+  },
+  numFollowers: {
+    type: Number,
+    default: 0
+  },
+},
+{
+timestamps: true, 
 })
 
 
