@@ -1,7 +1,14 @@
 import mongoose from 'mongoose'
 
+//see tagSchema
+const mongoose = require('mongoose')
+var slug = require('mongoose-slug-generator');
+mongoose.plugin(slug);
+//https://www.npmjs.com/package/mongoose-slug-generator
+//https://medium.com/fbdevclagos/how-to-create-unique-urls-in-an-expressjs-and-mongodb-app-78865802902e
 
-//category   ? predefined checklist...
+
+//category  
 const categorySchema = mongoose.Schema({
   name: {
     type: String,
@@ -11,9 +18,15 @@ const categorySchema = mongoose.Schema({
     timestamps: true
 })
 
+
+//tag
 const tagSchema = mongoose.Schema({ 
   name: {
     type: String,
+  },
+  slug: {   //double check this works
+    type: String,
+    slug: "name"
   }
 },
   {
@@ -76,7 +89,7 @@ const eventSchema = mongoose.Schema({
   },
   costYes: {          //button toggle?  
     type: Boolean,
-    default: False    //
+    default: False    
   },
   minCost: {
     type: Number,      //float?, if costYes true, populate following for cost?
@@ -87,19 +100,20 @@ const eventSchema = mongoose.Schema({
   countTickets: {
     type: Number,
   },
+  // like: [likeSchema],
   numLikes: {      //counter update upon like button...
-    type: Number,     //likeSchema?
+    type: Number,     //needed?
     default: 0
   },
-  attendee: {     //not sure where we should store this...on ticketModel?
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'users'
-  },
-  organizer: {
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'users',
-    required: true
-  },
+  // attendee: {     
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'users'
+  // },
+  // organizer: {
+  //   type: mongoose.Schema.Types.ObjectId, 
+  //   ref: 'organizers',
+  //   required: true
+  // },
   category: [categorySchema],
   tags: [tagSchema],  
 },

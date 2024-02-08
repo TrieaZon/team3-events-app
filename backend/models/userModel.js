@@ -49,15 +49,15 @@ const userSchema = mongoose.Schema({
     required: true,
     default: false
   },
-  isOrganizer: {       //update upon save event?
+  isOrganizer: {       //unnecessary?  update upon save event?
     type: Boolean,
     default: false
   },
-  organization: [organizationSchema],
+//   organizer: [organizerSchema],  redundant?
 },
 {
   timestamps: true
 })
 
-const User = mongoose.model('User', userSchema)
+const User = mongoose.model('users', userSchema) //change for consistency of collection names
 export default User
