@@ -21,6 +21,7 @@ export const eventListReducer = (state = {events: []}, action) => {
 
 }
 
+//substitute reviews?
 export const eventDetailsReducer = (state = {event: {reviews: []}}, action) => {
 
     switch(action.type) {
