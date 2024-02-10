@@ -16,14 +16,14 @@ const rootReducer = combineReducers({
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
 
 const initialState = {
-  userLogin: {userInfo}
+  userLogin: {userInfo: userInfoFromStorage}
 }
 //   cart: {cartItems: cartItemsFromStorage},
 
 
 const store = configureStore({
   reducer: rootReducer,
-  preoloadedState: initialState
+  preloadedState: initialState
 })
 
 export default store
