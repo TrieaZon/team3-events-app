@@ -3,9 +3,11 @@ import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import './bootstrap.css';
 import HomeScreen from './screens/HomeScreen';
 import EventDetails from './screens/EventDetails.js';
-import './bootstrap.css';
+import LoginScreen from './screens/LoginScreen.js';
+
 
 const App = () => {
   return (
@@ -17,6 +19,7 @@ const App = () => {
             <Routes>
               <Route path='/' exact element={<HomeScreen />} />
               <Route path='/event/:id' element={<EventDetails />} />
+              <Route path='/login' element={<LoginScreen />} />
             </Routes>
           </Container>
         </main>

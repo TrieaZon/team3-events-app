@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Navbar, Nav, Button, Form, Col } from 'react-bootstrap';
+import { Container, Navbar, Nav, Button, Form, Col, Link } from 'react-bootstrap';
 
 
 const Header = () => {
@@ -30,7 +30,8 @@ const Header = () => {
                             <Nav.Link as={Button} className="rounded-5" variant="light" href='/organizer'>Create Events</Nav.Link>
                             {/* Help center still needs dropdown window controls */}
                             <Nav.Link as={Button} className="rounded-5" variant="light" href='/help'>Help Center</Nav.Link>
-                            <Nav.Link as={Button} className="rounded-5" variant="light" href='/signin'>Log In</Nav.Link>
+                            <Nav.Link as={Button} className="rounded-5" variant="light" href='/login'>Log In</Nav.Link>
+                             {/* href, link || linkcontainer from reacter router dom doesn't redirect... */}
                             <Nav.Link as={Button} className="rounded-5" variant="light" href='/signin/signup'>Sign Up</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
