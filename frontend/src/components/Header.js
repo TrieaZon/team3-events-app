@@ -1,8 +1,22 @@
 import React from 'react';
-import { Container, Navbar, Nav, Button, Form, Col} from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+// import { useNavigate } from 'react-router-dom'
+import { Container, Navbar, Nav, NavDropdown, Button, Form, Col} from 'react-bootstrap';
+import { logout } from '../actions/userActions'
 
 
 const Header = () => {
+    const dispatch = useDispatch()
+
+    const userLogin = useSelector((state) => state.userLogin)
+    const {userInfo} = userLogin
+
+    
+    const logoutHandler = () => {
+        dispatch(logout())
+    }
+    
+
     return (
         
         <Container fluid className="px-0">
@@ -11,7 +25,7 @@ const Header = () => {
                     <Navbar.Brand className="fw-bold px-2 m-0" href="/">EventApp</Navbar.Brand>
                     
                     <Col>
-                        <Form className="flex-grow-1 p-0 bd-highlight">
+                        <Form className="flex-grow-1 px-4 bd-highlight">
                         <Form.Control
                             size=""
                             type="text"
@@ -30,9 +44,17 @@ const Header = () => {
                             <Nav.Link as={Button} className="rounded-5" variant="light" href='/organizer'>Create Events</Nav.Link>
                             {/* Help center still needs dropdown window controls */}
                             <Nav.Link as={Button} className="rounded-5" variant="light" href='/help'>Help Center</Nav.Link>
-                            <Nav.Link as={Button} className="rounded-5" variant="light" href='/signin'>Log In</Nav.Link>
-                             {/* href, link || linkcontainer from reacter router dom doesn't redirect... */}
-                            <Nav.Link as={Button} className="rounded-5" variant="light" href='/signup'>Sign Up</Nav.Link>
+
+                            {userInfo ? 
+                            (<NavDropdown title={userInfo.name} id='username'>
+                            <Nav.Link as={Button} className="rounded-5" variant="light" href='/profile'><i className='fas fa-user'></i>  Profile</Nav.Link>
+                            <Nav.Link as={Button} className="rounded-5" variant="light" onClick={logoutHandler}>Logout</Nav.Link>
+                            </NavDropdown>
+                            ) : ( 
+                                <Nav.Link as={Button} className="rounded-5" variant="light" href='/login'>Log In</Nav.Link>
+                                // (<Nav.Link as={Button} className="rounded-5" variant="light" href='/signup'>Sign Up</Nav.Link>
+                            )
+                            }
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>

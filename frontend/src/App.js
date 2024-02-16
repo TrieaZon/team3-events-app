@@ -19,7 +19,7 @@ const App = () => {
             <Routes>
               <Route path='/' exact element={<HomeScreen />} />
               <Route path='/event/:id' element={<EventDetails />} />
-              <Route path='/signin' element={<LoginScreen />} />
+              <Route path='/login' element={<LoginScreen />} />
             </Routes>
           </Container>
         </main>

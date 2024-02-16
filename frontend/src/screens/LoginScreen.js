@@ -32,13 +32,15 @@ const LoginScreen = () => {
   // text box input bindings
   const [email, setEmail] = useState('')
   const [ password, setPassword] = useState('')
-  
+  // const [authenticated, setAuthenticated] = useState('')
+
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(login(email, password))
-    // navigate("/")         not secure, sends password 
-  }
+    dispatch(login({email, password}))
+    navigate("/ticket")         
+    //not secure, sends password 
+  };
   
   
   return (
@@ -53,14 +55,14 @@ const LoginScreen = () => {
         <Form.Control type="email" placeholder="Enter email" 
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        />
+        ></Form.Control>
       </Form.Group>
 
       <Form.Group className="mt-1 mb-3" controlId="password">
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Enter password" 
         value={password}
-        onChange={(e) => setPassword(e.target.value)}/>
+        onChange={(e) => setPassword(e.target.value)}></Form.Control>
       </Form.Group>
 
       <Button variant="primary" type="submit" className="mt-0.5 mb-3">
