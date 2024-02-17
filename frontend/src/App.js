@@ -7,6 +7,8 @@ import './bootstrap.css';
 import HomeScreen from './screens/HomeScreen';
 import EventDetails from './screens/EventDetails.js';
 import LoginScreen from './screens/LoginScreen.js';
+import RegisterScreen from './screens/RegisterScreen.js';
+import ProfileScreen from './screens/ProfileScreen.js';
 
 
 const App = () => {
@@ -20,6 +22,8 @@ const App = () => {
               <Route path='/' exact element={<HomeScreen />} />
               <Route path='/event/:id' element={<EventDetails />} />
               <Route path='/login' element={<LoginScreen />} />
+              <Route path='/register' element={<RegisterScreen />} />
+              <Route path='/profile' element={<ProfileScreen />} />
             </Routes>
           </Container>
         </main>

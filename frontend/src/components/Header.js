@@ -41,15 +41,25 @@ const Header = () => {
                     
                     <Navbar.Collapse className="flex-grow-0 ms-3 me-2" id='basic-navbar-nav'>
                         <Nav className='fw-bold ms-auto'>
-                            <Nav.Link as={Button} className="rounded-5" variant="light" href='/events'>Find Events</Nav.Link>
-                            <Nav.Link as={Button} className="rounded-5" variant="light" href='/organizer'>Create Events</Nav.Link>
+                            <LinkContainer to='/events'> 
+                            <Nav.Link as={Button} className="rounded-5" variant="light">Find Events</Nav.Link>
+                            </LinkContainer>
+                           <LinkContainer to='/organizer'>  
+                           <Nav.Link as={Button} className="rounded-5" variant="light">Create Events</Nav.Link>
+                           </LinkContainer>
                             {/* Help center still needs dropdown window controls */}
-                            <Nav.Link as={Button} className="rounded-5" variant="light" href='/help'>Help Center</Nav.Link>
+                            <LinkContainer to='/help'> 
+                            <Nav.Link as={Button} className="rounded-5" variant="light" >Help Center</Nav.Link>
+                            </LinkContainer>
 
                             {userInfo ? 
                             (<NavDropdown title={userInfo.name} id='username'>
-                            <Nav.Link as={Button} className="rounded-5" variant="light" href='/profile'><i className='fas fa-user'></i>  Profile</Nav.Link>
+                           <LinkContainer to='/profile'>  
+                           <Nav.Link as={Button} className="rounded-5" variant="light"><i className='fas fa-user'></i>  Profile</Nav.Link>
+                           </LinkContainer>
+                            <LinkContainer to='/logout'> 
                             <Nav.Link as={Button} className="rounded-5" variant="light" onClick={logoutHandler}>Logout</Nav.Link>
+                            </LinkContainer>
                             </NavDropdown>
                             ) : (<LinkContainer to='/login'>
                                     <Nav.Link as={Button} className="rounded-5" variant="light" href='/login'>Log In</Nav.Link>

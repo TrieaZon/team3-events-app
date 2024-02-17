@@ -16,7 +16,7 @@ const LoginScreen = () => {
   // text box input bindings
   const [email, setEmail] = useState('')
   const [ password, setPassword] = useState('')
-  // const [authenticated, setAuthenticated] = useState('')
+
 
 
   //redirect if optional 
@@ -36,8 +36,6 @@ const LoginScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(login(email, password))
-    // navigate("/ticket")         
-    //not secure, sends password 
   };
   
   
@@ -48,7 +46,7 @@ const LoginScreen = () => {
       {loading && <Loader/>}
 
       <Form onSubmit={submitHandler}>
-        <Form.Group className="mt-3 mb-1" controlId="email">
+        <Form.Group className="mt-3 mb-2" controlId="email">
           <Form.Label>Email address</Form.Label>
           <Form.Control 
             type="email"
@@ -58,7 +56,7 @@ const LoginScreen = () => {
           </Form.Control>
         </Form.Group>
 
-        <Form.Group className="mt-1 mb-3" controlId="password">
+        <Form.Group className="mb-3" controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control 
             type="password"
@@ -74,22 +72,15 @@ const LoginScreen = () => {
       </Form>
       
     
-      <Row className='mb-4'>
+      <Row className='mt-3 mb-5'>
         <Col>
         <Form>
           <Form.Check 
           type="switch"
           id="new-user"
           label="New User?"
-          onChange={() => navigate("/signup")}/>
+          onChange={() => navigate("/register")}/>
         </Form>
-        
-        
-
-        {/*  New user?{' '} 
-        <Link to="/signup">
-        <Link to={redirect ? `/login?redirect=${redirect}` : '/signup'}>
-          </Link> */}
           </Col>
         </Row>
     </FormContainer>
