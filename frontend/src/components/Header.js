@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { useNavigate } from 'react-router-dom'
 import { Container, Navbar, Nav, NavDropdown, Button, Form, Col} from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { logout } from '../actions/userActions'
 
 
@@ -50,8 +51,9 @@ const Header = () => {
                             <Nav.Link as={Button} className="rounded-5" variant="light" href='/profile'><i className='fas fa-user'></i>  Profile</Nav.Link>
                             <Nav.Link as={Button} className="rounded-5" variant="light" onClick={logoutHandler}>Logout</Nav.Link>
                             </NavDropdown>
-                            ) : ( 
-                                <Nav.Link as={Button} className="rounded-5" variant="light" href='/login'>Log In</Nav.Link>
+                            ) : (<LinkContainer to='/login'>
+                                    <Nav.Link as={Button} className="rounded-5" variant="light" href='/login'>Log In</Nav.Link>
+                                </LinkContainer>
                                 // (<Nav.Link as={Button} className="rounded-5" variant="light" href='/signup'>Sign Up</Nav.Link>
                             )
                             }
