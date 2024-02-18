@@ -32,7 +32,7 @@ const ProfileScreen = () => {
     if (!userInfo) {
       navigate('/login')
     } else {
-      if (!user || !user.name) {
+      if (!user) {
         dispatch(getUserDetails('profile'))
       } else {
         setName(user.name)
@@ -41,13 +41,6 @@ const ProfileScreen = () => {
     }
   }, [dispatch, userInfo, user, navigate])
 
-
-  
-//Cannot read properties of undefined (reading 'name')
-// TypeError: Cannot read properties of undefined (reading 'name')
-
-  // tried this:  dispatch(getUserDetails(name, email, password))   
-  //also added as dependencies
 
 
 
@@ -67,7 +60,7 @@ const ProfileScreen = () => {
         <h2>User Profile</h2>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
-        {success && <Message variant='success'>Profile Updated</Message>}
+        {success && <Message variant='success'> Your profile has been updated</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId='name' className="mt-3 mb-2" >

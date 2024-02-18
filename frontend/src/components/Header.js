@@ -37,7 +37,7 @@ const Header = () => {
                         </Form>
                     </Col>
                     
-                    <Navbar.Toggle aria-controls='basic-navbar-nav' className="ms-2 me-2 px-2" />
+                    <Navbar.Toggle aria-controls='basic-navbar-nav ' className="ms-2 me-2 px-2" />
                     
                     <Navbar.Collapse className="flex-grow-0 ms-3 me-2" id='basic-navbar-nav'>
                         <Nav className='fw-bold ms-auto'>
@@ -53,7 +53,7 @@ const Header = () => {
                             </LinkContainer>
 
                             {userInfo ? 
-                            (<NavDropdown title={userInfo.name} id='username'>
+                            (<NavDropdown className="me-3" title={userInfo.name} id='username'>
                            <LinkContainer to='/profile'>  
                            <Nav.Link as={Button} className="rounded-5" variant="light"><i className='fas fa-user'></i>  Profile</Nav.Link>
                            </LinkContainer>
