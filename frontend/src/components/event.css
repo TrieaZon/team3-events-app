@@ -1,4 +1,4 @@
-.image {
+/* .image {
   position: relative;
   display: inline-flex;
   width: 100%;
@@ -17,6 +17,47 @@
   z-index: 1;
 } 
 
-.show-icons:hover + .hide {
+.show-icons:hover {
   display: block;
+
+
+    <Card className= 'border border-0 my-3 mx-1 rounded-bottom-4 btn-light'>
+    <Link to={`/event/${event._id}`}>
+    <Card.Img className="rounded image show-icons" variant="top" src={event.image} />
+    <div className="icons hide my-2">
+      <Button variant="light" className="me-1"><i class="fa-regular fa-heart"></i></Button>
+      <Button variant="light" className="me-1"><i class="fa-solid fa-share"></i></Button>
+      </div>
+      </Link>
+} */
+
+
+.card {
+  position: relative;
+}
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+
+.icons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+} 
+
+.show-icons:hover + .hide {
+  visibility: visible;
+}
+
+
+.btn {
+  opacity: 0.80;
 }

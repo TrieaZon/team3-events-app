@@ -62,6 +62,7 @@ const ProfileScreen = () => {
         {error && <Message variant='danger'>{error}</Message>}
         {success && <Message variant='success'> Your profile has been updated</Message>}
         {loading && <Loader />}
+        
         <Form onSubmit={submitHandler}>
           <Form.Group controlId='name' className="mt-3 mb-2" >
             <Form.Label>Name</Form.Label>

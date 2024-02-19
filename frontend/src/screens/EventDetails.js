@@ -15,8 +15,11 @@ const EventDetails = () => {
         dispatch(listEventDetails(id))
     },[dispatch, id]);
 
+    let updatedEventDetails = { }
     const eventDetails = useSelector((state) => state.eventDetails);
     const {loading, event, error} = eventDetails;
+
+    updatedEventDetails.date = new Date(event.date).toLocaleDateString() 
 
     return (
         <>
@@ -47,7 +50,7 @@ const EventDetails = () => {
                                     <ListGroup variant='flush' className="border border-0">
                                         
                                         <ListGroupItem className="border border-0 my-3">
-                                            <h5>{event.date}</h5>
+                                            <h5>{updatedEventDetails.date}</h5>
                                             <h1 className="fw-bold">{event.name}!</h1>
                                         </ListGroupItem>
                                         <ListGroupItem className="border border-0 my-3">

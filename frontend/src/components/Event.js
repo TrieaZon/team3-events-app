@@ -9,20 +9,25 @@ import './event.css'
 
 
 const Event = ({event}) => {
+
+  let updatedEvent = {}
+  updatedEvent.date = new Date(event.date).toLocaleDateString() 
+
   return (
-  <Card className= 'border border-0 my-3 mx-1 rounded-bottom-4 btn-light'>
+  <Card className='border border-0 my-3 mx-1 rounded-bottom-4 btn-light'>
     <Link to={`/event/${event._id}`}>
     <Card.Img className="rounded image show-icons" variant="top" src={event.image} />
-    <div className="icons hide my-2">
-      <Button variant="light" className="me-1"><i class="fa-regular fa-heart"></i></Button>
-      <Button variant="light" className="me-1"><i class="fa-solid fa-share"></i></Button>
+    <div className="btn-group my-2 icons hide">
+      <Button variant="light" className="m-1 p-1 btn-rounded"><i class="fa-regular fa-heart"></i></Button>
+      <Button variant="light" className="m-1 p-1 btn-rounded"><i class="fa-solid fa-share"></i></Button>
       </div>
       </Link>
+
     <Card.Body>
     <Link to={`/event/${event._id}`}>
       <Card.Title as='div'> {event.name} </Card.Title>
       </Link>
-      <Card.Text as='div'> {event.date}, {event.startTime}-{event.endTime}  </Card.Text>
+      <Card.Text as='div'> {updatedEvent.date}, {event.startTime}-{event.endTime}  </Card.Text>
       <Card.Text as='div'> {event.venue}, {event.address} </Card.Text>
       <Card.Text as='div'> {event.costYes ? `From $ ${event.minCost}`: 'Free'} </Card.Text>
     </Card.Body>
