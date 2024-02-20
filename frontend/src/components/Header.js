@@ -1,8 +1,23 @@
 import React from 'react';
-import { Container, Navbar, Nav, Button, Form, Col} from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+// import { useNavigate } from 'react-router-dom'
+import { Container, Navbar, Nav, NavDropdown, Button, Form, Col} from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { logout } from '../actions/userActions'
 
 
 const Header = () => {
+    const dispatch = useDispatch()
+
+    const userLogin = useSelector((state) => state.userLogin)
+    const {userInfo} = userLogin
+
+    
+    const logoutHandler = () => {
+        dispatch(logout())
+    }
+    
+
     return (
         
         <Container fluid className="px-0">
@@ -11,7 +26,7 @@ const Header = () => {
                     <Navbar.Brand className="fw-bold px-2 m-0" href="/">EventApp</Navbar.Brand>
                     
                     <Col>
-                        <Form className="flex-grow-1 p-0 bd-highlight">
+                        <Form className="flex-grow-1 px-4 bd-highlight">
                         <Form.Control
                             size=""
                             type="text"
@@ -22,17 +37,36 @@ const Header = () => {
                         </Form>
                     </Col>
                     
-                    <Navbar.Toggle aria-controls='basic-navbar-nav' className="ms-2 me-2 px-2" />
+                    <Navbar.Toggle aria-controls='basic-navbar-nav ' className="ms-2 me-2 px-2" />
                     
                     <Navbar.Collapse className="flex-grow-0 ms-3 me-2" id='basic-navbar-nav'>
                         <Nav className='fw-bold ms-auto'>
-                            <Nav.Link as={Button} className="rounded-5" variant="light" href='/events'>Find Events</Nav.Link>
-                            <Nav.Link as={Button} className="rounded-5" variant="light" href='/organizer'>Create Events</Nav.Link>
+                            <LinkContainer to='/events'> 
+                            <Nav.Link as={Button} className="rounded-5" variant="light">Find Events</Nav.Link>
+                            </LinkContainer>
+                           <LinkContainer to='/organizer'>  
+                           <Nav.Link as={Button} className="rounded-5" variant="light">Create Events</Nav.Link>
+                           </LinkContainer>
                             {/* Help center still needs dropdown window controls */}
-                            <Nav.Link as={Button} className="rounded-5" variant="light" href='/help'>Help Center</Nav.Link>
-                            <Nav.Link as={Button} className="rounded-5" variant="light" href='/signin'>Log In</Nav.Link>
-                             {/* href, link || linkcontainer from reacter router dom doesn't redirect... */}
-                            <Nav.Link as={Button} className="rounded-5" variant="light" href='/signup'>Sign Up</Nav.Link>
+                            <LinkContainer to='/help'> 
+                            <Nav.Link as={Button} className="rounded-5" variant="light" >Help Center</Nav.Link>
+                            </LinkContainer>
+
+                            {userInfo ? 
+                            (<NavDropdown className="me-3" title={userInfo.name} id='username'>
+                           <LinkContainer to='/profile'>  
+                           <Nav.Link as={Button} className="rounded-5" variant="light"><i className='fas fa-user'></i>  Profile</Nav.Link>
+                           </LinkContainer>
+                            <LinkContainer to='/logout'> 
+                            <Nav.Link as={Button} className="rounded-5" variant="light" onClick={logoutHandler}>Logout</Nav.Link>
+                            </LinkContainer>
+                            </NavDropdown>
+                            ) : (<LinkContainer to='/login'>
+                                    <Nav.Link as={Button} className="rounded-5" variant="light" href='/login'>Log In</Nav.Link>
+                                </LinkContainer>
+                                // (<Nav.Link as={Button} className="rounded-5" variant="light" href='/signup'>Sign Up</Nav.Link>
+                            )
+                            }
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>

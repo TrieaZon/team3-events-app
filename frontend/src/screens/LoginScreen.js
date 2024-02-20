@@ -13,6 +13,11 @@ const LoginScreen = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  // text box input bindings
+  const [email, setEmail] = useState('')
+  const [ password, setPassword] = useState('')
+
+
 
   //redirect if optional 
   const redirect = location.search ? location.search.split('=')[1] : '/'      
@@ -21,24 +26,17 @@ const LoginScreen = () => {
 
   const {loading, error, userInfo} = userLogin
 
-    // 
-  //  useEffect(() => {
-  //   if (userInfo) {
-  //     navigate("/")
-  //   }
-  // }, [navigate, userInfo, redirect])
-
-
-  // text box input bindings
-  const [email, setEmail] = useState('')
-  const [ password, setPassword] = useState('')
-  
+    
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect)
+    }
+  }, [navigate, userInfo, redirect])
 
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(login(email, password))
-    // navigate("/")         not secure, sends password 
-  }
+  };
   
   
   return (
@@ -47,45 +45,44 @@ const LoginScreen = () => {
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader/>}
 
-      <Form onSubmit={submitHandler}/>
-      <Form.Group className="mt-3 mb-1" controlId="email">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" 
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        />
-      </Form.Group>
+      <Form onSubmit={submitHandler}>
+        <Form.Group className="mt-3 mb-2" controlId="email">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control 
+            type="email"
+            placeholder="Enter email" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}>              
+          </Form.Control>
+        </Form.Group>
 
-      <Form.Group className="mt-1 mb-3" controlId="password">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Enter password" 
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}/>
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control 
+            type="password"
+            placeholder="Enter password" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}>  
+          </Form.Control>
+        </Form.Group>
 
-      <Button variant="primary" type="submit" className="mt-0.5 mb-3">
-        Submit
-      </Button>
+        <Button variant="primary" type="submit" className="mt-0.5 mb-3">
+          Submit
+        </Button>
+      </Form>
       
     
-      <Row className='mb-4'>
+      <Row className='mt-3 mb-5'>
         <Col>
         <Form>
-        <Form.Check 
-        type="switch"
-        id="new-user"
-        label="New User?"
-        onChange={() => navigate("/signup")}
-      />
+          <Form.Check 
+          type="switch"
+          id="new-user"
+          label="New User?"
+          onChange={() => navigate("/register")}/>
         </Form>
-        
-
-        {/*  New user?{' '} 
-        <Link to="/signup">
-        <Link to={redirect ? `/login?redirect=${redirect}` : '/signup'}>
-          </Link> */}
           </Col>
-          </Row>
+        </Row>
     </FormContainer>
   )
 }
