@@ -10,11 +10,8 @@ const rootReducer = combineReducers({
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
   userRegister: userRegisterReducer
-//   cart: cartReducer,
-//   userLogin: userLoginReducer
 })
 
-// const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
 
 const userInfoFromStorage = localStorage.getItem('userInfo') 
   ? JSON.parse(localStorage.getItem('userInfo')) 
@@ -23,7 +20,6 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 const initialState = {
   userLogin: {userInfo: userInfoFromStorage}
 }
-//   cart: {cartItems: cartItemsFromStorage},
 
 
 const store = configureStore({

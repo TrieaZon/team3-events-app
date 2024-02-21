@@ -1,17 +1,27 @@
 import React, { useState } from 'react'
-import {Container, Row, Col} from 'react-bootstrap'
+import {Container, Row, Col, Button, Modal} from 'react-bootstrap'
+import FormContainer from './FormContainer'
+import { createEvent } from '..'
 
-const CheckoutModal = ({setPopUp}) => {
+const CheckoutModal = ({setShow}) => {
 
 
   return (
-    <Container className="my-3">
-      <Row className="justify-content-md-center">
-        <Col xs={12} md={6}>
-          
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <Modal.Header closeButton>
+        <Modal.Title>Checkout</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        Form will go here.
+      </Modal.Body>
+      <Modal.Footer>
+      <Button
+        onClick={() => setShow(false)}
+      >
+        X
+      </Button>
+      </Modal.Footer>
+    </>
   )
 }
 

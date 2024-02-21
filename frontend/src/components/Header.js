@@ -57,7 +57,7 @@ const Header = () => {
                            <LinkContainer to='/profile'>  
                            <Nav.Link as={Button} className="rounded-5" variant="light"><i className='fas fa-user'></i>  Profile</Nav.Link>
                            </LinkContainer>
-                            <LinkContainer to='/logout'> 
+                            <LinkContainer to='/'> 
                             <Nav.Link as={Button} className="rounded-5" variant="light" onClick={logoutHandler}>Logout</Nav.Link>
                             </LinkContainer>
                             </NavDropdown>

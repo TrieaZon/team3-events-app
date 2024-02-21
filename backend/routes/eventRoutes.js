@@ -3,13 +3,13 @@ import { getEventById, getEvents } from '../controllers/eventController.js'
 
 const router = express.Router()
 
-// @desc    Fetch all products
-// @route   GET /api/products/
+// @desc    Fetch all events
+// @route   GET /api/events/
 // @access  public
 router.get('/', getEvents)
 
-// @desc    Fetch single product by id
-// @route   GET /api/products/:id
+// @desc    Fetch single event by id
+// @route   GET /api/events/:id
 // @access  public
 router.get('/:id', getEventById)
 
