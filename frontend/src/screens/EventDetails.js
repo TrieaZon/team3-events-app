@@ -5,11 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listEventDetails } from '../actions/eventActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import CheckoutModal from '../components/CheckoutModal';
 
 const EventDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const [popUp, setPopUp] = useState(false);
+    const activePopUp = popUp ? " active-popup" : "";
     
     useEffect(() => {
         dispatch(listEventDetails(id))
@@ -28,7 +32,7 @@ const EventDetails = () => {
                 error ? (<Message variant='danger'>{error}</Message>) :
                 (
                     <>
-                        <Container fluid="xxl" className="px-md-5 my-4 pb-2">
+                        <Container fluid="xxl" className={"px-md-5 my-4 pb-2" + activePopUp}>
                             <Row>
                                 <Col sm={12}>
                                     <Carousel className="event-hero">                    
@@ -44,7 +48,7 @@ const EventDetails = () => {
                             </Row>    
                         </Container>
                                 
-                        <Container fluid="xxl" className="px-md-5">
+                        <Container fluid="xxl" className={"px-md-5" + activePopUp}>
                             <Row>
                                 <Col sm={9}>
                                     <ListGroup variant='flush' className="border border-0">
@@ -94,6 +98,10 @@ const EventDetails = () => {
                                     </ListGroup>
                                 </Col>
                             </Row>
+                        </Container>
+
+                        <Container>
+                            {popUp && <CheckoutModal setPopUp={setPopUp} />}
                         </Container>
                     </>
                 )
