@@ -7,9 +7,12 @@ import {Container, Row, Col,
 } from 'react-bootstrap';
 import FormContainer from './FormContainer';
 
-const CheckoutModal = ({setCheckoutShow}) => {
+const OrderModal = ({setOrderShow, setCheckoutShow}) => {
 
-    const [paymentMethod, setPaymentMethod] = useState('Paypal');
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const { id } = useParams();
+
 
   return (
     <>
@@ -79,33 +82,6 @@ const CheckoutModal = ({setCheckoutShow}) => {
                           <Form.Control type="cell phone" placeholder="cell phone" />
                         </Form.Group>
                       </Row>
-                      <Row>
-                        <h4>Payment Method</h4>
-                        <Form.Group>
-                            <Form.Label as='legend'> Select Payment Method       </Form.Label>
-                            <Col>
-                              <Form.Check
-                                type='radio'
-                                label='Paypal'
-                                id='Paypal'
-                                value='Paypal'
-                                name='paymentMethod'
-                                checked
-                                onChange={(e) => setPaymentMethod(e.target.value)}>
-                              </Form.Check>
-                            </Col>
-                            <Form.Check
-                              type='radio'
-                              label='Credit Card'
-                              id='CreditCard'
-                              value='CreditCard'
-                              name='paymentMethod'
-                              checked
-                              onChange={(e) => setPaymentMethod(e.target.value)}
-                              >
-                            </Form.Check>
-                         </Form.Group>
-                      </Row>
                     </Form>
                   </Row>
                 </Col>
@@ -114,7 +90,7 @@ const CheckoutModal = ({setCheckoutShow}) => {
       </Modal.Body>
       <Modal.Footer>
       <Button
-        onClick={() => setCheckoutShow(false)}
+        onClick={() => setOrderShow(false)}
       >
         X
       </Button>
@@ -123,4 +99,4 @@ const CheckoutModal = ({setCheckoutShow}) => {
   )
 }
 
-export default CheckoutModal
+export default OrderModal

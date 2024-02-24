@@ -7,17 +7,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listEventDetails } from '../actions/eventActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import OrderModal from '../components/OrderModal';
 import CheckoutModal from '../components/CheckoutModal';
-import { set } from 'mongoose';
 
 const EventDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     // const navigate = useNavigate();
 
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [orderShow, setOrderShow] = useState(false);
+    const [checkoutShow, setCheckoutShow] = useState(false);
+
+    const handleOrderClose = () => setOrderShow(false);
+    const handleOrderShow = () => setOrderShow(true);
+    const handleCheckoutClose = () => setCheckoutShow(false);
+    const handleCheckoutShow = () => setCheckoutShow(true);
    
     useEffect(() => {
         dispatch(listEventDetails(id))
@@ -90,9 +94,10 @@ const EventDetails = () => {
                                             <Row>
                                                 <Col>
                                                     <Button 
-                                                        onClick={handleShow} 
-                                                        className='bg-danger'>
-                                                        Get tickets!
+                                                        onClick={handleOrderShow}
+                                                        disabled={event.ticketNum === 0}
+                                                        className='bg-danger'
+                                                    > Get tickets!
                                                     </Button>
                                                         
                                                     {/* <Nav href="/local-events" className="d-flex justify-content-center mb-1 rounded-2 px-0 py-1 bg-danger" >
@@ -112,12 +117,27 @@ const EventDetails = () => {
                         </Container>
 
                         <Modal
-                            show={show}
-                            onHide={handleClose}
+                            show={orderShow}
+                            onHide={handleOrderClose}
                             backdrop='static'
                             keyboard={false}
+                            size='xxl'
+                            aria-labelledby="order window"
+                            centered
                         >
-                            {<CheckoutModal setShow={setShow} />}
+                            {<OrderModal setOrderShow={setOrderShow} setCheckoutShow={setCheckoutShow} />}
+                        </Modal>
+
+                        <Modal
+                            show={checkoutShow}
+                            onHide={handleCheckoutClose}
+                            backdrop='static'
+                            keyboard={false}
+                            size='xxl'
+                            aria-labelledby="checkout window"
+                            centered
+                        >
+                            {<CheckoutModal setCheckoutShow={setCheckoutShow} />}
                         </Modal>
                     </>
                 )
