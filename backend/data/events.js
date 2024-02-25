@@ -17,7 +17,7 @@ const events = [
     numLikes: 23,
     costYes: false,
     minCost: 0,
-    countTickets: 100,
+    ticketNum: 100,
   },
   {
     name: "Open Mic Night",
@@ -57,7 +57,7 @@ const events = [
     numLikes: 55,
     costYes: false,
     minCost: 45.00,
-    countTickets: 500,
+    ticketNum: 500,
   },
   {
     name: "Speed Dating",
@@ -77,7 +77,7 @@ const events = [
     numLikes: 23,
     costYes: false,
     minCost: 0,
-    countTickets: 100,
+    ticketNum: 100,
   },
   {
     name: "Karaoke Night",
@@ -117,7 +117,7 @@ const events = [
     numLikes: 55,
     costYes: false,
     minCost: 45.00,
-    countTickets: 500,
+    ticketNum: 500,
   },
   {
     name: "All You Can Eat",
@@ -137,7 +137,7 @@ const events = [
     numLikes: 23,
     costYes: false,
     minCost: 0,
-    countTickets: 100,
+    ticketNum: 100,
   },
   {
     name: "Comedy Night",
@@ -177,7 +177,7 @@ const events = [
     numLikes: 55,
     costYes: false,
     minCost: 45.00,
-    countTickets: 500,
+    ticketNum: 500,
   },
 ]
 

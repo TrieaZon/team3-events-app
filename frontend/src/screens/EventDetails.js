@@ -92,11 +92,12 @@ const EventDetails = () => {
                                         </ListGroupItem>
                                         <ListGroupItem className="border border-top-0">
                                             <Row>
-                                                <Col>
+                                                <Col className='d-grid gap-2'>
                                                     <Button 
                                                         onClick={handleOrderShow}
                                                         disabled={event.ticketNum === 0}
-                                                        className='bg-danger'
+                                                        size='lg'
+                                                        variant='danger'
                                                     > Get tickets!
                                                     </Button>
                                                         
@@ -115,15 +116,17 @@ const EventDetails = () => {
                                 </Col>
                             </Row>
                         </Container>
-
+                    
                         <Modal
                             show={orderShow}
                             onHide={handleOrderClose}
                             backdrop='static'
                             keyboard={false}
-                            size='xxl'
+                            fullscreen={true}
                             aria-labelledby="order window"
-                            centered
+                            className='d-flex justify-content-center mt-5 pt-3'
+                            
+                            
                         >
                             {<OrderModal setOrderShow={setOrderShow} setCheckoutShow={setCheckoutShow} />}
                         </Modal>
@@ -139,6 +142,7 @@ const EventDetails = () => {
                         >
                             {<CheckoutModal setCheckoutShow={setCheckoutShow} />}
                         </Modal>
+                    
                     </>
                 )
             };

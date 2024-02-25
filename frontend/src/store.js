@@ -2,6 +2,8 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { eventListReducer, eventDetailsReducer } from './reducers/eventReducers'
 // import { cartReducer } from './reducers/cartReducers'
 import { userLoginReducer, userDetailsReducer, userUpdateProfileReducer, userRegisterReducer } from './reducers/userReducers'
+import { orderCreateReducer,
+  orderDetailsReducer, orderPayReducer } from './reducers/orderReducers';
 
 const rootReducer = combineReducers({
   eventList: eventListReducer,
@@ -9,7 +11,10 @@ const rootReducer = combineReducers({
   userLogin: userLoginReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
-  userRegister: userRegisterReducer
+  userRegister: userRegisterReducer,
+  orderCreate: orderCreateReducer, 
+  orderDetails: orderDetailsReducer, 
+  orderPay: orderPayReducer,
 })
 
 

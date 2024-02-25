@@ -9,7 +9,6 @@ import FormContainer from './FormContainer';
 
 const CheckoutModal = ({setCheckoutShow}) => {
 
-    const [paymentMethod, setPaymentMethod] = useState('Paypal');
 
   return (
     <>
@@ -91,7 +90,7 @@ const CheckoutModal = ({setCheckoutShow}) => {
                                 value='Paypal'
                                 name='paymentMethod'
                                 checked
-                                onChange={(e) => setPaymentMethod(e.target.value)}>
+                            >
                               </Form.Check>
                             </Col>
                             <Form.Check
@@ -101,7 +100,6 @@ const CheckoutModal = ({setCheckoutShow}) => {
                               value='CreditCard'
                               name='paymentMethod'
                               checked
-                              onChange={(e) => setPaymentMethod(e.target.value)}
                               >
                             </Form.Check>
                          </Form.Group>
