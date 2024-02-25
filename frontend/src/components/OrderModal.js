@@ -5,14 +5,21 @@ import {Container, Row, Col,
   Button, Modal, Form, Image,
   InputGroup, ListGroup, ListGroupItem,
 } from 'react-bootstrap';
-import { createOrder } from '../actions/orderActions';
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { createOrder, getOrderDetails, 
+  getPaypalKey, payOrder, 
+} from '../actions/orderActions';
 import Message from './Message';
+import Loader from './Loader';
+import { ORDER_PAY_RESET } from '../constants/orderConstants';
 
 const OrderModal = ({setOrderShow}) => {
 
   const [qty, setQty] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState('PayPal')
-  const [deliveryEmail, setDeliveryEmail] = useState()
+  const [deliveryEmail, setDeliveryEmail] = useState('')
+  const [isPaid, setIsPaid] = useState(false)
+  const [createdOrder, setCreatedOrder] = useState()
 
 
   const dispatch = useDispatch();
@@ -26,32 +33,36 @@ const OrderModal = ({setOrderShow}) => {
   let updatedEventDetails = new Date(event.date).toLocaleDateString()
 
   //   Calculate prices
-  const addDecimals = (num) => {
-    return (Math.round(num * 100) / 100).toFixed(2)
+  if(!loading) {
+    const addDecimals = (num) => {
+      return (Math.round(num * 100) / 100).toFixed(2)
+    }
+    updatedSummary.eventPrice = addDecimals(
+      Number(event.minCost * qty)
+    )
+    updatedSummary.taxPrice = addDecimals(
+      Number((0.15 * updatedSummary.eventPrice).toFixed(2))
+    )
+    updatedSummary.totalPrice = (
+      Number(updatedSummary.eventPrice) +
+      Number(updatedSummary.taxPrice)
+    ).toFixed(2)
   }
-  updatedSummary.eventPrice = addDecimals(
-    Number(event.minCost * qty)
-  )
-  updatedSummary.taxPrice = addDecimals(
-    Number((0.15 * updatedSummary.eventPrice).toFixed(2))
-  )
-  updatedSummary.totalPrice = (
-    Number(updatedSummary.eventPrice) +
-    Number(updatedSummary.taxPrice)
-  ).toFixed(2)
 
-  const orderCreate = useSelector((state) => state.orderCreate)
-  const { order, orderSuccess, orderError } = orderCreate
+  const orderPay = useSelector((state) => state.orderPay)
+  const { loading: loadingPay, success: successPay, paypalkey } = orderPay
 
   useEffect(() => {
-    if (orderSuccess) {
-      navigate(`/order/${order._id}`)
+    dispatch(getPaypalKey())
+
+    if (createdOrder || successPay) {
+      dispatch({ type: ORDER_PAY_RESET })
+      dispatch(getOrderDetails(id))
     }
-  }, [navigate, orderSuccess, order])
+  }, [dispatch, successPay, id, createdOrder])
 
   const placeOrderHandler = () => {
-    dispatch(
-      createOrder({
+      setCreatedOrder({
         orderItems: [
           {
             name: event.name,
@@ -67,7 +78,7 @@ const OrderModal = ({setOrderShow}) => {
         taxPrice: updatedSummary.taxPrice,
         totalPrice: updatedSummary.totalPrice,
       })
-    )
+      console.log(`test ${createdOrder}`)
   }
 
   const addCount = () => {
@@ -91,7 +102,11 @@ const OrderModal = ({setOrderShow}) => {
   // }
 
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : error ? (
+    <Message variant='danger'>{error}</Message>
+  ) : (
     <>
 
       <Row className='m-1'>
@@ -266,6 +281,48 @@ const OrderModal = ({setOrderShow}) => {
                         </Row>
 
                       </ListGroup.Item>
+                      {// why the double && //
+              !isPaid && (
+                <ListGroup.Item>
+                  {loadingPay && <Loader />}
+                    <PayPalScriptProvider options={{ "client-id": paypalkey,
+                    components: "buttons",
+                    currency: "USD" }}>
+                        <PayPalButtons 
+                         style={{ layout: "horizontal" }}
+                         createOrder={(createdOrder, actions) => {
+                    return actions.order
+                        .create({
+                            purchase_units: [
+                                {
+                                    amount: {
+                                        currency_code: "USD",
+                                        value: updatedSummary.totalPrice,
+                                    },
+                                },
+                            ],
+                        })
+                        .then((id) => {
+                            // Your code here after create the order
+                            return id;
+                        });
+                }}
+                onApprove={function (data, actions) {
+                    return actions.createdOrder.capture().then(function () {
+                        // Your code here after capture the order
+                        let paymentResult = {
+                          id: data.paymentID,
+                          status: 'Paid',
+                          update_time: new Date().getDate().toString(),
+                          email_address: deliveryEmail
+                        }
+                        dispatch(payOrder(id, paymentResult))
+                    });
+                }}
+                        />
+                    </PayPalScriptProvider>
+                </ListGroup.Item>
+              )}
                     </ListGroup>
                   </Col>
                 </Row>
@@ -289,7 +346,7 @@ const OrderModal = ({setOrderShow}) => {
         </Modal.Footer>
       </Row>
     </>
-  )
-}
+  );
+};
 
 export default OrderModal

@@ -130,18 +130,6 @@ const EventDetails = () => {
                         >
                             {<OrderModal setOrderShow={setOrderShow} setCheckoutShow={setCheckoutShow} />}
                         </Modal>
-
-                        <Modal
-                            show={checkoutShow}
-                            onHide={handleCheckoutClose}
-                            backdrop='static'
-                            keyboard={false}
-                            size='xxl'
-                            aria-labelledby="checkout window"
-                            centered
-                        >
-                            {<CheckoutModal setCheckoutShow={setCheckoutShow} />}
-                        </Modal>
                     
                     </>
                 )
