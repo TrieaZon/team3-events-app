@@ -12,7 +12,7 @@ const OrderModal = ({setOrderShow}) => {
 
   const [qty, setQty] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState('PayPal')
-  const [deliveryEmail, setDeliveryEmail] = useState('')
+  const [deliveryEmail, setDeliveryEmail] = useState()
 
 
   const dispatch = useDispatch();
@@ -206,7 +206,7 @@ const OrderModal = ({setOrderShow}) => {
                       <ListGroup.Item>
                         <Row>
                           <Col>Delivery Email</Col>
-                          <Col className='d-flex flex-row-reverse'>{updatedSummary.deliveryEmail}</Col>
+                          <Col className='d-flex flex-row-reverse'>{deliveryEmail}</Col>
                         </Row>
                       </ListGroup.Item>
                       <ListGroup.Item>
@@ -238,13 +238,9 @@ const OrderModal = ({setOrderShow}) => {
                             >
                               <i class="fa-sharp fa-solid fa-minus"></i>
                             </Button>
-                          
-                            
-                            
-                            <h5 className='pt-2 mx-3 '>{qty}</h5>
-                            
 
-                          
+                            <h5 className='pt-2 mx-3 '>{qty}</h5>
+
                             <Button
                               type='button'
                               className=''
@@ -263,7 +259,7 @@ const OrderModal = ({setOrderShow}) => {
                               disabled={qty === 0}
                               onClick={placeOrderHandler}
                             >
-                              Place Order
+                              Confirm Order
                             </Button>
                           </Col>
 
