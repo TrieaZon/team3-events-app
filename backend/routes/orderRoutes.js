@@ -7,7 +7,7 @@ const router = express.Router()
 // @desc    Create a new order
 // @route   POST /api/orders/
 // @access  private
-router.route('/').post(protect, addOrderItems)
+router.route('/').post(addOrderItems)
 
 // @desc    get order by Id
 // @route   GET /api/orders/:id

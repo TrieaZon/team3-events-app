@@ -29,7 +29,6 @@ const OrderModal = ({ setOrderShow }) => {
   const [qty, setQty] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("PayPal");
   const [deliveryEmail, setDeliveryEmail] = useState("");
-  const [isPaid, setIsPaid] = useState(false);
   const [createdOrder, setCreatedOrder] = useState();
 
   const dispatch = useDispatch();
@@ -38,8 +37,13 @@ const OrderModal = ({ setOrderShow }) => {
   const { id } = useParams();
 
   const updatedSummary = {};
+
   const eventDetails = useSelector((state) => state.eventDetails);
   const { loading, event, error } = eventDetails;
+
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, success, orderError } = orderCreate;
+
   let updatedEventDetails = new Date(event.date).toLocaleDateString();
 
   //   Calculate prices
@@ -60,35 +64,41 @@ const OrderModal = ({ setOrderShow }) => {
   const { loading: loadingPay, success: successPay, paypalkey } = orderPay;
 
   useEffect(() => {
-    if (!createdOrder) {
+    // if(createdOrder) {
+    //   dispatch(
+    //     createOrder(createdOrder)
+    //   )
+    // }
+    if (!success) {
       return;
     }
     dispatch(getPaypalKey());
 
     if (successPay) {
       dispatch({ type: ORDER_PAY_RESET });
-      dispatch(getOrderDetails(id));
+      
     }
-  }, [dispatch, successPay, id, createdOrder]);
+  }, [dispatch, successPay, success]);
 
   const placeOrderHandler = () => {
-    setCreatedOrder({
-      orderItems: [
-        {
-          name: event.name,
-          qty,
-          image: event.image,
-          price: event.minCost,
-          event: event._id,
-        },
-      ],
-      deliveryEmail: deliveryEmail,
-      paymentMethod: paymentMethod,
-      itemsPrice: updatedSummary.eventPrice,
-      taxPrice: updatedSummary.taxPrice,
-      totalPrice: updatedSummary.totalPrice,
-    });
-    console.log(`test ${createdOrder}`);
+    dispatch(
+      createOrder({
+        orderItems: [
+          {
+            name: event.name,
+            qty,
+            image: event.image,
+            price: event.minCost,
+            event: event._id,
+          },
+        ],
+        deliveryEmail: deliveryEmail,
+        paymentMethod: paymentMethod,
+        itemsPrice: updatedSummary.eventPrice,
+        taxPrice: updatedSummary.taxPrice,
+        totalPrice: updatedSummary.totalPrice,
+      })
+    ) 
   };
 
   const addCount = () => {
@@ -168,7 +178,7 @@ const OrderModal = ({ setOrderShow }) => {
                     id="PayPal"
                     name="paymentMethod"
                     value="PayPal"
-                    checked
+                    defaultChecked
                   />
                 </Form.Group>
               </Row>
@@ -240,7 +250,7 @@ const OrderModal = ({ setOrderShow }) => {
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item className="border border-0">
-                  {error && <Message variant="danger">{error}</Message>}
+                  {orderError && <Message variant="danger">{orderError}</Message>}
                 </ListGroup.Item>
                 <ListGroup.Item className="border border-0">
                   <Row className="">
@@ -304,7 +314,7 @@ const OrderModal = ({ setOrderShow }) => {
                       >
                         <PayPalButtons
                           style={{ layout: "horizontal" }}
-                          createOrder={(createdOrder, actions) => {
+                          createOrder={(data, actions) => {
                             return actions.order
                               .create({
                                 purchase_units: [
