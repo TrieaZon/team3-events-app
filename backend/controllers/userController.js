@@ -14,7 +14,7 @@ const authUser = asyncHandler(async(req, res) => {
   //matchPassword userModel
   if (user && await user.matchPassword(password)){
     return res.json({
-      _id: user.id,
+      _id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
@@ -84,7 +84,9 @@ const registerUser = asyncHandler(async(req, res) => {
   }
 
   const user = await User.create({
-    name, email, password,
+    name, 
+    email, 
+    password,
   })
   
   if (user) {

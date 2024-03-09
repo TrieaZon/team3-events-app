@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Nav, Row,
+import { Container, Row,
     Col, Carousel, ListGroup, 
     ListGroupItem, Button, Modal } from 'react-bootstrap';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { listEventDetails } from '../actions/eventActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import OrderModal from '../components/OrderModal';
-import CheckoutModal from '../components/CheckoutModal';
+import ConfirmationModal from '../components/ConfirmationModal';
 
 const EventDetails = () => {
     const { id } = useParams();
@@ -16,12 +16,12 @@ const EventDetails = () => {
     // const navigate = useNavigate();
 
     const [orderShow, setOrderShow] = useState(false);
-    const [checkoutShow, setCheckoutShow] = useState(false);
+    const [confirmationShow, setConfirmationShow] = useState(false);
 
     const handleOrderClose = () => setOrderShow(false);
     const handleOrderShow = () => setOrderShow(true);
-    const handleCheckoutClose = () => setCheckoutShow(false);
-    const handleCheckoutShow = () => setCheckoutShow(true);
+    const handleConfirmationClose = () => setConfirmationShow(false);
+    const handleConfirmationShow = () => setConfirmationShow(true);
    
     useEffect(() => {
         dispatch(listEventDetails(id))
@@ -125,10 +125,20 @@ const EventDetails = () => {
                             fullscreen={true}
                             aria-labelledby="order window"
                             className='d-flex justify-content-center mt-5 pt-3'
-                            
-                            
                         >
-                            {<OrderModal setOrderShow={setOrderShow} setCheckoutShow={setCheckoutShow} />}
+                            {<OrderModal setOrderShow={setOrderShow} setConfirmationShow={setConfirmationShow} />}
+                        </Modal>
+
+                        <Modal
+                            show={confirmationShow}
+                            onHide={handleConfirmationClose}
+                            backdrop='static'
+                            keyboard={false}
+                            fullscreen={true}
+                            aria-labelledby='confirmation window'
+                            className='d-flex justify-content-center mt-5 pt-3'
+                        >
+                            {<ConfirmationModal setConfirmationShow={setConfirmationShow} />}
                         </Modal>
                     
                     </>

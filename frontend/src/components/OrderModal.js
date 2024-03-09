@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Container,
@@ -9,7 +8,6 @@ import {
   Modal,
   Form,
   Image,
-  InputGroup,
   ListGroup,
   ListGroupItem,
 } from "react-bootstrap";
@@ -25,21 +23,21 @@ import Loader from "./Loader";
 import { ORDER_PAY_RESET } from "../constants/orderConstants";
 import CustomPayPalButton from "./CustomPayPalButton";
 
-const OrderModal = ({ setOrderShow }) => {
+const OrderModal = ({ setOrderShow, setConfirmationShow }) => {
   const [qty, setQty] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("PayPal");
   const [deliveryEmail, setDeliveryEmail] = useState("");
-  const [isPaid, setIsPaid] = useState(false);
-  const [createdOrder, setCreatedOrder] = useState();
 
   const dispatch = useDispatch();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { id } = useParams();
 
   const updatedSummary = {};
+
   const eventDetails = useSelector((state) => state.eventDetails);
   const { loading, event, error } = eventDetails;
+
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, success, orderError } = orderCreate;
+
   let updatedEventDetails = new Date(event.date).toLocaleDateString();
 
   //   Calculate prices
@@ -60,35 +58,39 @@ const OrderModal = ({ setOrderShow }) => {
   const { loading: loadingPay, success: successPay, paypalkey } = orderPay;
 
   useEffect(() => {
-    if (!createdOrder) {
+
+    if (!success) {
       return;
     }
     dispatch(getPaypalKey());
 
     if (successPay) {
       dispatch({ type: ORDER_PAY_RESET });
-      dispatch(getOrderDetails(id));
+      dispatch(getOrderDetails(order._id));
+      setOrderShow(false);
+      setConfirmationShow(true);
     }
-  }, [dispatch, successPay, id, createdOrder]);
+  }, [dispatch, successPay, success]);
 
   const placeOrderHandler = () => {
-    setCreatedOrder({
-      orderItems: [
-        {
-          name: event.name,
-          qty,
-          image: event.image,
-          price: event.minCost,
-          event: event._id,
-        },
-      ],
-      deliveryEmail: deliveryEmail,
-      paymentMethod: paymentMethod,
-      itemsPrice: updatedSummary.eventPrice,
-      taxPrice: updatedSummary.taxPrice,
-      totalPrice: updatedSummary.totalPrice,
-    });
-    console.log(`test ${createdOrder}`);
+    dispatch(
+      createOrder({
+        orderItems: [
+          {
+            name: event.name,
+            qty,
+            image: event.image,
+            price: event.minCost,
+            event: event._id,
+          },
+        ],
+        deliveryEmail,
+        paymentMethod,
+        itemsPrice: updatedSummary.eventPrice,
+        taxPrice: updatedSummary.taxPrice,
+        totalPrice: updatedSummary.totalPrice,
+      })
+    ) 
   };
 
   const addCount = () => {
@@ -141,9 +143,14 @@ const OrderModal = ({ setOrderShow }) => {
                 </Form.Group>
               </Row>
               <Row className="mb-3">
-                <Form.Group as={Col} required controlId="formEmail">
+                {/* <Form.Group as={Col} required controlId="formEmail">
                   <Form.Label>Billing Email</Form.Label>
                   <Form.Control type="email" placeholder="" />
+                </Form.Group> */}
+
+                <Form.Group as={Col} required controlId="cellPhone">
+                  <Form.Label>Phone number</Form.Label>
+                  <Form.Control />
                 </Form.Group>
 
                 <Form.Group as={Col} required controlId="formEmail">
@@ -156,10 +163,7 @@ const OrderModal = ({ setOrderShow }) => {
               </Row>
 
               <Row>
-                <Form.Group as={Col} required controlId="cellPhone">
-                  <Form.Label>Phone number</Form.Label>
-                  <Form.Control />
-                </Form.Group>
+                
                 <Form.Group as={Col} required>
                   <Form.Label>Payment Method</Form.Label>
                   <Form.Check
@@ -168,7 +172,7 @@ const OrderModal = ({ setOrderShow }) => {
                     id="PayPal"
                     name="paymentMethod"
                     value="PayPal"
-                    checked
+                    defaultChecked
                   />
                 </Form.Group>
               </Row>
@@ -240,7 +244,7 @@ const OrderModal = ({ setOrderShow }) => {
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item className="border border-0">
-                  {error && <Message variant="danger">{error}</Message>}
+                  {orderError && <Message variant="danger">{orderError}</Message>}
                 </ListGroup.Item>
                 <ListGroup.Item className="border border-0">
                   <Row className="">
@@ -304,7 +308,7 @@ const OrderModal = ({ setOrderShow }) => {
                       >
                         <PayPalButtons
                           style={{ layout: "horizontal" }}
-                          createOrder={(createdOrder, actions) => {
+                          createOrder={(data, actions) => {
                             return actions.order
                               .create({
                                 purchase_units: [
@@ -332,7 +336,7 @@ const OrderModal = ({ setOrderShow }) => {
                                   update_time: new Date().getDate().toString(),
                                   email_address: deliveryEmail,
                                 };
-                                dispatch(payOrder(id, paymentResult));
+                                dispatch(payOrder(order._id, paymentResult));
                               });
                           }}
                         />
@@ -346,20 +350,6 @@ const OrderModal = ({ setOrderShow }) => {
         </Container>
       </Modal.Body>
 
-      <Row className="mt-auto mx-1">
-        <Modal.Footer className="">
-          <Button
-            type="submit"
-            onSubmit={() => {
-              setOrderShow(false);
-            }}
-            variant="success"
-            form="orderForm"
-          >
-            Checkout
-          </Button>
-        </Modal.Footer>
-      </Row>
     </>
   );
 };

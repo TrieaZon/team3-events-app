@@ -1,10 +1,10 @@
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 const users = [
   {
     name: 'Admin user',
     email: 'test@gmail.com',
-    password: bcrypt.hashSync('123456', 10),
+    password: bcrypt.hashSync('65432', 10),
     isAdmin: true
   },
   {

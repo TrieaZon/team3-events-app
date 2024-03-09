@@ -15,7 +15,7 @@ const Event = ({event}) => {
 
   return (
   <Card className='border border-0 my-3 mx-1 rounded-bottom-4 btn-light'>
-    <Link to={`/event/${event._id}`}>
+    <Link to={`/events/${event._id}`}>
     <Card.Img className="rounded image show-icons" variant="top" src={event.image} />
     <div className="btn-group my-2 icons hide">
       <Button variant="light" className="m-1 p-1 btn-rounded"><i class="fa-regular fa-heart"></i></Button>
@@ -24,7 +24,7 @@ const Event = ({event}) => {
       </Link>
 
     <Card.Body>
-    <Link to={`/event/${event._id}`}>
+    <Link to={`/events/${event._id}`}>
       <Card.Title as='div'> {event.name} </Card.Title>
       </Link>
       <Card.Text as='div'> {updatedEvent.date}, {event.startTime}-{event.endTime}  </Card.Text>
