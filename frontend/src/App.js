@@ -20,7 +20,7 @@ const App = () => {
           <Container fluid className="px-0">
             <Routes>
               <Route path='/' exact element={<HomeScreen />} />
-              <Route path='/event/:id' element={<EventDetails />} />
+              <Route path='/events/:id' element={<EventDetails />} />
               <Route path='/login' element={<LoginScreen />} />
               <Route path='/register' element={<RegisterScreen />} />
               <Route path='/profile' element={<ProfileScreen />} />
