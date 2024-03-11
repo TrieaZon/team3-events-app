@@ -27,6 +27,7 @@ const OrderModal = ({ setOrderShow, setConfirmationShow }) => {
   const [qty, setQty] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("PayPal");
   const [deliveryEmail, setDeliveryEmail] = useState("");
+  const [blockPay, setBlockPay] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -62,15 +63,17 @@ const OrderModal = ({ setOrderShow, setConfirmationShow }) => {
     if (!success) {
       return;
     }
+    if (!blockPay)
     dispatch(getPaypalKey());
+    setBlockPay(true);
 
-    if (successPay) {
-      dispatch({ type: ORDER_PAY_RESET });
-      dispatch(getOrderDetails(order._id));
+    if (successPay || blockPay) {
+      // dispatch({ type: ORDER_PAY_RESET });
+      // dispatch(getOrderDetails(order._id));
       setOrderShow(false);
       setConfirmationShow(true);
     }
-  }, [dispatch, successPay, success]);
+  }, [dispatch, successPay, success, blockPay]);
 
   const placeOrderHandler = () => {
     dispatch(
