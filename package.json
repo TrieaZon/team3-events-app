@@ -1,7 +1,7 @@
 {
   "name": "team3-event-app",
   "version": "1.0.0",
-  "description": "MERN event-finder app for practice",
+  "description": "MERN event-finder app clone for practice",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -10,7 +10,8 @@
     "client": "npm start --prefix frontend",
     "app": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seeder.js",
-    "data:destroy": "node backend/seeder.js -d"
+    "data:destroy": "node backend/seeder.js -d",
+    "heroku-postbuild": "NPM-CONFIG-PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.1",
-    "nodemon": "^3.0.2"
+    "nodemon": "^3.0.2",
+    "path": "^0.12.7"
   }
 }
