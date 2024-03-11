@@ -320,9 +320,9 @@ const OrderModal = ({ setOrderShow, setConfirmationShow }) => {
                                   },
                                 ],
                               })
-                              .then((id) => {
+                              .then((orderId) => {
                                 // Your code here after create the order
-                                return id;
+                                return orderId;
                               });
                           }}
                           onApprove={function (data, actions) {

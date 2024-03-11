@@ -29,7 +29,7 @@ const Event = ({event}) => {
       </Link>
       <Card.Text as='div'> {updatedEvent.date}, {event.startTime}-{event.endTime}  </Card.Text>
       <Card.Text as='div'> {event.venue}, {event.address} </Card.Text>
-      <Card.Text as='div'> {event.costYes ? `From $ ${event.minCost}`: 'Free'} </Card.Text>
+      <Card.Text as='div'> {event.minCost !== 0 ? `From $ ${event.minCost}`: 'Free'} </Card.Text>
     </Card.Body>
   </Card>
   )
