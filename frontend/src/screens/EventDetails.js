@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row,
     Col, Carousel, ListGroup, 
     ListGroupItem, Button, Modal } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { listEventDetails } from '../actions/eventActions';
 import Message from '../components/Message';
@@ -13,19 +13,29 @@ import ConfirmationModal from '../components/ConfirmationModal';
 const EventDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [orderShow, setOrderShow] = useState(false);
     const [confirmationShow, setConfirmationShow] = useState(false);
 
     const handleOrderClose = () => setOrderShow(false);
-    const handleOrderShow = () => setOrderShow(true);
+    const handleOrderShow = () => {
+        if(userInfo){
+            setOrderShow(true);
+        } else {
+            navigate(`/login?redirect=/events/${id}`)
+        }
+    }
     const handleConfirmationClose = () => setConfirmationShow(false);
     const handleConfirmationShow = () => setConfirmationShow(true);
    
     useEffect(() => {
         dispatch(listEventDetails(id))
+
     },[dispatch, id]);
+
+    const userLogin = useSelector((state) => state.userLogin);
+    const {userError, userInfo} = userLogin;
 
     const eventDetails = useSelector((state) => state.eventDetails);
     const {loading, event, error} = eventDetails;
@@ -35,7 +45,7 @@ const EventDetails = () => {
         <>
             {
                 loading ? (<Loader />) :
-                error ? (<Message variant='danger'>{error}</Message>) :
+                error || userError ? (<Message variant='danger'>{error}</Message>) :
                 (
                     <>
                         <Container fluid="xxl" className="px-md-5 my-4 pb-2">
